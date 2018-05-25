@@ -6,7 +6,7 @@
 /*   By: jroussel <jroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 12:33:11 by jroussel          #+#    #+#             */
-/*   Updated: 2018/05/22 15:21:32 by jroussel         ###   ########.fr       */
+/*   Updated: 2018/05/25 18:40:51 by jroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ t_list	*ft_lstnew(const void *content, size_t size)
 		if (!(list->content = malloc(size * sizeof(*content))))
 			return (NULL);
 		ft_memcpy(list->content, content, size);
-		list->content_size = size;
+		list->size = size;
 	}
 	else
 	{
 		list->content = NULL;
-		list->content_size = 0;
+		list->size = 0;
 	}
 	list->next = NULL;
 	return (list);

@@ -6,7 +6,7 @@
 #    By: jroussel <jroussel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/04 16:42:14 by jroussel          #+#    #+#              #
-#    Updated: 2018/05/25 16:38:11 by jroussel         ###   ########.fr        #
+#    Updated: 2018/05/25 18:37:06 by jroussel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,14 +59,6 @@ SRCS    = ft_memset.c\
           ft_lstremove.c\
           ft_lstget.c\
           ft_lstiter.c\
-          ft_putchar.c\
-          ft_putchar_fd.c\
-          ft_putstr.c\
-          ft_putstr_fd.c\
-          ft_putendl.c\
-          ft_putendl_fd.c\
-          ft_putnbr.c\
-          ft_putnbr_fd.c\
 		  ft_printf.c\
           ft_isblank.c\
           ft_islower.c\

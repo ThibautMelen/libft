@@ -6,7 +6,7 @@
 /*   By: jroussel <jroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 20:18:28 by jroussel          #+#    #+#             */
-/*   Updated: 2018/05/25 17:02:48 by jroussel         ###   ########.fr       */
+/*   Updated: 2018/05/25 18:37:22 by jroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,13 @@
 # include <wchar.h>
 
 # define BUFF_SIZE 1024
-# define FD content_size
 # define SPLITTER '\n'
 
 typedef unsigned char	t_byte;
 typedef struct			s_list
 {
 	void			*content;
-	size_t			content_size;
+	size_t			size;
 	struct s_list	*next;
 }						t_list;
 typedef struct			s_vars
@@ -106,7 +105,7 @@ char					*ft_strtrim(const char *str);
 char					**ft_strsplit(const char *str, char c);
 void					ft_strupper(char *str);
 void					ft_strlower(char *str);
-char					*ft_strcapitalize(const char *str);
+void					ft_strcapitalize(char *str);
 
 /*
 ** List
@@ -124,14 +123,6 @@ void					ft_lstiter(t_list *list, void (*f)(t_list *elem));
 /*
 ** Writers
 */
-void					ft_putchar(char c);
-void					ft_putchar_fd(char c, int fd);
-void					ft_putstr(const char *str);
-void					ft_putstr_fd(const char *str, int fd);
-void					ft_putendl(const char *str);
-void					ft_putendl_fd(const char *str, int fd);
-void					ft_putnbr(int nbr);
-void					ft_putnbr_fd(int nbr, int fd);
 int						ft_printf(const char *format, ...);
 
 /*
@@ -152,7 +143,7 @@ int						ft_isnumber(const char *str);
 */
 long					ft_atol(const char *str);
 char					*ft_ltoa(intmax_t nbr);
-char					*ft_ultoa(uintmax_t	nbr);
+char					*ft_ultoa(uintmax_t nbr);
 char					*ft_ultoa_base(uintmax_t nbr, uint8_t base);
 int						ft_toupper(int chr);
 int						ft_tolower(int chr);

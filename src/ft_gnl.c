@@ -6,7 +6,7 @@
 /*   By: jroussel <jroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 10:31:06 by jroussel          #+#    #+#             */
-/*   Updated: 2018/05/22 15:20:52 by jroussel         ###   ########.fr       */
+/*   Updated: 2018/05/25 18:41:29 by jroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static t_list	*get_file(t_list **files, const int fd)
 	file = *files;
 	while (file != NULL)
 	{
-		if ((int)file->FD == fd)
+		if ((int)file->size == fd)
 			return (file);
 		file = file->next;
 	}
 	if (!(file = ft_lstnew("\0", 1)))
 		return (NULL);
-	file->FD = fd;
+	file->size = fd;
 	ft_lstadd(files, file);
 	return (file);
 }
