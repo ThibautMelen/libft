@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   func_u.c                                           :+:      :+:    :+:   */
+/*   pf_func_u.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jroussel <jroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/13 13:35:35 by jroussel          #+#    #+#             */
-/*   Updated: 2018/05/25 16:29:28 by jroussel         ###   ########.fr       */
+/*   Updated: 2018/05/26 13:17:32 by jroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-static uintmax_t	get_nbr(t_vars *vars, va_list *args)
+static uintmax_t	get_nbr(t_pf_vars *vars, va_list *args)
 {
 	if (vars->size == 0)
 		return (va_arg(*args, uint32_t));
@@ -31,7 +31,7 @@ static uintmax_t	get_nbr(t_vars *vars, va_list *args)
 	return (va_arg(*args, uint32_t));
 }
 
-void				func_u(t_vars *vars, va_list *args)
+void				pf_func_u(t_pf_vars *vars, va_list *args)
 {
 	uintmax_t	nbr;
 
@@ -48,8 +48,8 @@ void				func_u(t_vars *vars, va_list *args)
 			vars->precision - vars->valen) < 0)
 		vars->precision = 0;
 	vars->olen = (vars->precision == -1 ? 0 : vars->precision) + vars->valen;
-	create_output(vars);
-	format(vars);
+	pf_create_output(vars);
+	pf_format(vars);
 	free(vars->value);
-	write_output(vars);
+	pf_write_output(vars);
 }

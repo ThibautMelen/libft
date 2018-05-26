@@ -6,7 +6,7 @@
 #    By: jroussel <jroussel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/04 16:42:14 by jroussel          #+#    #+#              #
-#    Updated: 2018/05/25 18:37:06 by jroussel         ###   ########.fr        #
+#    Updated: 2018/05/26 13:18:33 by jroussel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,31 +76,31 @@ SRCS    = ft_memset.c\
           ft_toupper.c\
           ft_tolower.c\
           ft_gnl.c\
-		  buffer.c\
-          color.c\
-          convert.c\
-          format.c\
-          output.c\
-          parse.c\
-          unicode.c\
-          util.c\
-          vars.c\
-          func_s.c\
-          func_ss.c\
-          func_p.c\
-          func_d.c\
-          func_dd.c\
-          func_i.c\
-          func_o.c\
-          func_oo.c\
-          func_u.c\
-          func_uu.c\
-          func_x.c\
-          func_xx.c\
-          func_c.c\
-          func_cc.c\
-          func_percent.c\
-          func_n.c\
+		  pf_buffer.c\
+          pf_color.c\
+          pf_convert.c\
+          pf_format.c\
+          pf_output.c\
+          pf_parse.c\
+          pf_unicode.c\
+          pf_util.c\
+          pf_vars.c\
+          pf_func_s.c\
+          pf_func_ss.c\
+          pf_func_p.c\
+          pf_func_d.c\
+          pf_func_dd.c\
+          pf_func_i.c\
+          pf_func_o.c\
+          pf_func_oo.c\
+          pf_func_u.c\
+          pf_func_uu.c\
+          pf_func_x.c\
+          pf_func_xx.c\
+          pf_func_c.c\
+          pf_func_cc.c\
+          pf_func_percent.c\
+          pf_func_n.c\
 
 SRCS   := $(addprefix $(SRC_DIR)/,$(SRCS))
 OBJS    = $(subst $(SRC_DIR),$(OBJ_DIR),$(SRCS:.c=.o))

@@ -6,7 +6,7 @@
 /*   By: jroussel <jroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 20:18:28 by jroussel          #+#    #+#             */
-/*   Updated: 2018/05/25 18:37:22 by jroussel         ###   ########.fr       */
+/*   Updated: 2018/05/26 13:26:07 by jroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct			s_list
 	size_t			size;
 	struct s_list	*next;
 }						t_list;
-typedef struct			s_vars
+typedef struct			s_pf_vars
 {
 	t_byte	buff[BUFF_SIZE];
 	int		pb;
@@ -48,17 +48,17 @@ typedef struct			s_vars
 	char	*value;
 	int		valen;
 	int		negative;
-}						t_vars;
-typedef struct			s_func
+}						t_pf_vars;
+typedef struct			s_pf_func
 {
-	void	(*call)(t_vars *, va_list *);
+	void	(*call)(t_pf_vars *, va_list *);
 	char	flag;
-}						t_func;
-typedef struct			s_color
+}						t_pf_func;
+typedef struct			s_pf_color
 {
 	char	*id;
 	char	*value;
-}						t_color;
+}						t_pf_color;
 
 /*
 ** Memory
@@ -156,36 +156,39 @@ int						ft_gnl(const int fd, char **line);
 /*
 ** For ft_printf
 */
-void					write_buff(t_byte byte, t_vars *vars);
-void					print_buff(t_vars *vars);
-void					parse_color(const char *f, t_vars *vars, va_list *args);
-void					convert(t_vars *vars, va_list *args);
-void					format(t_vars *vars);
-void					write_output(t_vars *vars);
-void					create_output(t_vars *vars);
-void					parse(const char *format, t_vars *vars, va_list *args);
-void					write_unicode(t_vars *vars, wchar_t wc, int s, int *i);
-int						bin_size(wchar_t wc);
-int						isflag(int type, char c);
-void					define_prefix(t_vars *vars);
-void					init_vars(t_vars *vars);
-void					reinit_vars(t_vars *vars);
-void					func_s(t_vars *vars, va_list *args);
-void					func_ss(t_vars *vars, va_list *args);
-void					func_p(t_vars *vars, va_list *args);
-void					func_d(t_vars *vars, va_list *args);
-void					func_dd(t_vars *vars, va_list *args);
-void					func_i(t_vars *vars, va_list *args);
-void					func_o(t_vars *vars, va_list *args);
-void					func_oo(t_vars *vars, va_list *args);
-void					func_u(t_vars *vars, va_list *args);
-void					func_uu(t_vars *vars, va_list *args);
-void					func_x(t_vars *vars, va_list *args);
-void					func_xx(t_vars *vars, va_list *args);
-void					func_c(t_vars *vars, va_list *args);
-void					func_cc(t_vars *vars, va_list *args);
-void					func_percent(t_vars *vars, va_list *args);
-void					func_n(t_vars *vars, va_list *args);
-void					alt_func_c(t_vars *vars, char c);
+void					pf_write_buff(t_byte byte, t_pf_vars *vars);
+void					pf_print_buff(t_pf_vars *vars);
+void					pf_parse_color(const char *format, t_pf_vars *vars,
+										va_list *args);
+void					pf_convert(t_pf_vars *vars, va_list *args);
+void					pf_format(t_pf_vars *vars);
+void					pf_write_output(t_pf_vars *vars);
+void					pf_create_output(t_pf_vars *vars);
+void					pf_parse(const char *format, t_pf_vars *vars,
+									va_list *args);
+void					pf_write_unicode(t_pf_vars *vars, wchar_t wc, int size,
+											int *i);
+int						pf_bin_size(wchar_t wc);
+int						pf_isflag(int type, char c);
+void					pf_define_prefix(t_pf_vars *vars);
+void					pf_init_vars(t_pf_vars *vars);
+void					pf_reinit_vars(t_pf_vars *vars);
+void					pf_func_s(t_pf_vars *vars, va_list *args);
+void					pf_func_ss(t_pf_vars *vars, va_list *args);
+void					pf_func_p(t_pf_vars *vars, va_list *args);
+void					pf_func_d(t_pf_vars *vars, va_list *args);
+void					pf_func_dd(t_pf_vars *vars, va_list *args);
+void					pf_func_i(t_pf_vars *vars, va_list *args);
+void					pf_func_o(t_pf_vars *vars, va_list *args);
+void					pf_func_oo(t_pf_vars *vars, va_list *args);
+void					pf_func_u(t_pf_vars *vars, va_list *args);
+void					pf_func_uu(t_pf_vars *vars, va_list *args);
+void					pf_func_x(t_pf_vars *vars, va_list *args);
+void					pf_func_xx(t_pf_vars *vars, va_list *args);
+void					pf_func_c(t_pf_vars *vars, va_list *args);
+void					pf_func_cc(t_pf_vars *vars, va_list *args);
+void					pf_func_percent(t_pf_vars *vars, va_list *args);
+void					pf_func_n(t_pf_vars *vars, va_list *args);
+void					pf_alt_func_c(t_pf_vars *vars, char c);
 
 #endif

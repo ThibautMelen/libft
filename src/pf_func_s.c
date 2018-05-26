@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   func_s.c                                           :+:      :+:    :+:   */
+/*   pf_func_s.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jroussel <jroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 15:49:24 by jroussel          #+#    #+#             */
-/*   Updated: 2018/05/25 16:29:23 by jroussel         ###   ########.fr       */
+/*   Updated: 2018/05/26 13:17:34 by jroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-static void	fill_right(t_vars *vars, char *str)
+static void	fill_right(t_pf_vars *vars, char *str)
 {
 	int i;
 
@@ -27,7 +27,7 @@ static void	fill_right(t_vars *vars, char *str)
 		vars->output[i++ + vars->olen] = ' ';
 }
 
-static void	fill_left(t_vars *vars, char *str)
+static void	fill_left(t_pf_vars *vars, char *str)
 {
 	int i;
 
@@ -42,13 +42,13 @@ static void	fill_left(t_vars *vars, char *str)
 	}
 }
 
-void		func_s(t_vars *vars, va_list *args)
+void		pf_func_s(t_pf_vars *vars, va_list *args)
 {
 	char	*str;
 
 	if (vars->size == 'l')
 	{
-		func_ss(vars, args);
+		pf_func_ss(vars, args);
 		return ;
 	}
 	str = va_arg(*args, char *);
@@ -57,10 +57,10 @@ void		func_s(t_vars *vars, va_list *args)
 	vars->olen = ft_strlen(str);
 	if (vars->precision > -1 && vars->olen > vars->precision)
 		vars->olen = vars->precision;
-	create_output(vars);
+	pf_create_output(vars);
 	if (vars->options['-'])
 		fill_right(vars, str);
 	else
 		fill_left(vars, str);
-	write_output(vars);
+	pf_write_output(vars);
 }

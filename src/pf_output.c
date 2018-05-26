@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   func_n.c                                           :+:      :+:    :+:   */
+/*   pf_output.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jroussel <jroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/13 13:57:45 by jroussel          #+#    #+#             */
-/*   Updated: 2018/05/25 16:29:06 by jroussel         ###   ########.fr       */
+/*   Created: 2018/05/06 19:48:08 by jroussel          #+#    #+#             */
+/*   Updated: 2018/05/26 13:17:27 by jroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-void	func_n(t_vars *vars, va_list *args)
+void	pf_write_output(t_pf_vars *vars)
 {
-	int	*ptr;
+	int i;
 
-	ptr = va_arg(*args, int *);
-	if (ptr != NULL)
-		*ptr = vars->len;
+	i = 0;
+	while (i < vars->olen + vars->width)
+		pf_write_buff(vars->output[i++], vars);
+}
+
+void	pf_create_output(t_pf_vars *vars)
+{
+	vars->width = vars->width - vars->olen;
+	if (vars->width < 0)
+		vars->width = 0;
+	if (!(vars->output = (t_byte *)malloc(vars->olen + vars->width)))
+		exit(-1);
 }

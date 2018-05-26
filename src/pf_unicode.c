@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unicode.c                                          :+:      :+:    :+:   */
+/*   pf_unicode.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jroussel <jroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 17:25:43 by jroussel          #+#    #+#             */
-/*   Updated: 2018/05/25 17:00:45 by jroussel         ###   ########.fr       */
+/*   Updated: 2018/05/26 13:17:21 by jroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-void	write_unicode(t_vars *vars, wchar_t wc, int s, int *i)
+void	pf_write_unicode(t_pf_vars *vars, wchar_t wc, int size, int *i)
 {
-	if (s == 1)
+	if (size == 1)
 		vars->output[(*i)++] = (t_byte)wc;
-	else if (s == 2)
+	else if (size == 2)
 	{
 		vars->output[(*i)++] = ((wc & 0x7C0) >> 6) | 0xC0;
 		vars->output[(*i)++] = (wc & 0x3F) | 0x80;
 	}
-	else if (s == 3)
+	else if (size == 3)
 	{
 		vars->output[(*i)++] = ((wc & 0xF000) >> 12) | 0xE0;
 		vars->output[(*i)++] = ((wc & 0xFC0) >> 6) | 0x80;
@@ -36,7 +36,7 @@ void	write_unicode(t_vars *vars, wchar_t wc, int s, int *i)
 	}
 }
 
-int		bin_size(wchar_t wc)
+int		pf_bin_size(wchar_t wc)
 {
 	int size;
 

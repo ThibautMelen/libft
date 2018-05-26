@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format.c                                           :+:      :+:    :+:   */
+/*   pf_format.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jroussel <jroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 15:47:09 by jroussel          #+#    #+#             */
-/*   Updated: 2018/05/25 16:28:38 by jroussel         ###   ########.fr       */
+/*   Updated: 2018/05/26 13:17:42 by jroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-static int	putprefix(t_vars *vars, int i)
+static int	putprefix(t_pf_vars *vars, int i)
 {
 	int j;
 
@@ -22,7 +22,7 @@ static int	putprefix(t_vars *vars, int i)
 	return (i);
 }
 
-static int	putprecision(t_vars *vars, int i)
+static int	putprecision(t_pf_vars *vars, int i)
 {
 	int j;
 
@@ -32,7 +32,7 @@ static int	putprecision(t_vars *vars, int i)
 	return (i);
 }
 
-static int	putvalue(t_vars *vars, int i)
+static int	putvalue(t_pf_vars *vars, int i)
 {
 	int j;
 
@@ -42,7 +42,7 @@ static int	putvalue(t_vars *vars, int i)
 	return (i);
 }
 
-static int	putwidth(t_vars *vars, char c, int i)
+static int	putwidth(t_pf_vars *vars, char c, int i)
 {
 	int j;
 
@@ -52,7 +52,7 @@ static int	putwidth(t_vars *vars, char c, int i)
 	return (i);
 }
 
-void		format(t_vars *vars)
+void		pf_format(t_pf_vars *vars)
 {
 	int i;
 

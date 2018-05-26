@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   func_ss.c                                          :+:      :+:    :+:   */
+/*   pf_func_ss.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jroussel <jroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 18:07:22 by jroussel          #+#    #+#             */
-/*   Updated: 2018/05/25 16:29:25 by jroussel         ###   ########.fr       */
+/*   Updated: 2018/05/26 13:23:09 by jroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-static void		fill_right(t_vars *vars, wchar_t *wstr)
+static void		fill_right(t_pf_vars *vars, wchar_t *wstr)
 {
 	int i;
 	int	j;
@@ -24,7 +24,7 @@ static void		fill_right(t_vars *vars, wchar_t *wstr)
 		if (MB_CUR_MAX == 1 && wstr[j] > 127 && wstr[j] < 256)
 			vars->output[i++] = (char)wstr[j];
 		else
-			write_unicode(vars, wstr[j], bin_size(wstr[j]), &i);
+			pf_write_unicode(vars, wstr[j], pf_bin_size(wstr[j]), &i);
 		j++;
 	}
 	i = 0;
@@ -32,7 +32,7 @@ static void		fill_right(t_vars *vars, wchar_t *wstr)
 		vars->output[i++ + vars->olen] = ' ';
 }
 
-static void		fill_left(t_vars *vars, wchar_t *wstr)
+static void		fill_left(t_pf_vars *vars, wchar_t *wstr)
 {
 	int i;
 	int	j;
@@ -47,12 +47,12 @@ static void		fill_left(t_vars *vars, wchar_t *wstr)
 		if (MB_CUR_MAX == 1 && wstr[j] > 127 && wstr[j] < 256)
 			vars->output[i++] = (char)wstr[j];
 		else
-			write_unicode(vars, wstr[j], bin_size(wstr[j]), &i);
+			pf_write_unicode(vars, wstr[j], pf_bin_size(wstr[j]), &i);
 		j++;
 	}
 }
 
-static size_t	ft_wstrlen(wchar_t *wstr, t_vars *vars)
+static size_t	pf_wstrlen(wchar_t *wstr, t_pf_vars *vars)
 {
 	size_t	len;
 	int		i;
@@ -68,12 +68,12 @@ static size_t	ft_wstrlen(wchar_t *wstr, t_vars *vars)
 			vars->len = -1;
 			return (-1);
 		}
-		len += bin_size(wstr[i++]);
+		len += pf_bin_size(wstr[i++]);
 	}
 	return (len);
 }
 
-static int		get_plen(t_vars *vars, wchar_t *wstr)
+static int		get_plen(t_pf_vars *vars, wchar_t *wstr)
 {
 	int	len;
 	int	i;
@@ -91,17 +91,17 @@ static int		get_plen(t_vars *vars, wchar_t *wstr)
 				vars->len = -1;
 				return (-1);
 			}
-			if (len + bin_size(wstr[i]) > vars->precision)
+			if (len + pf_bin_size(wstr[i]) > vars->precision)
 				break ;
-			len += bin_size(wstr[i++]);
+			len += pf_bin_size(wstr[i++]);
 		}
 	}
 	else
-		return (ft_wstrlen(wstr, vars));
+		return (pf_wstrlen(wstr, vars));
 	return (len);
 }
 
-void			func_ss(t_vars *vars, va_list *args)
+void			pf_func_ss(t_pf_vars *vars, va_list *args)
 {
 	wchar_t	*wstr;
 
@@ -110,10 +110,10 @@ void			func_ss(t_vars *vars, va_list *args)
 		wstr = L"(null)";
 	if ((vars->olen = get_plen(vars, wstr)) == -1)
 		return ;
-	create_output(vars);
+	pf_create_output(vars);
 	if (vars->options['-'])
 		fill_right(vars, wstr);
 	else
 		fill_left(vars, wstr);
-	write_output(vars);
+	pf_write_output(vars);
 }

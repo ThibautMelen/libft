@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   pf_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jroussel <jroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 13:06:14 by jroussel          #+#    #+#             */
-/*   Updated: 2018/05/25 16:29:44 by jroussel         ###   ########.fr       */
+/*   Updated: 2018/05/26 13:26:46 by jroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-static void	set_size(t_vars *vars, char tmp)
+static void	set_size(t_pf_vars *vars, char tmp)
 {
 	int			j;
 	int			k;
@@ -32,7 +32,7 @@ static void	set_size(t_vars *vars, char tmp)
 		vars->size = tmp;
 }
 
-static void	parse_size(const char *format, t_vars *vars, int *i)
+static void	parse_size(const char *format, t_pf_vars *vars, int *i)
 {
 	char	tmp;
 
@@ -50,7 +50,7 @@ static void	parse_size(const char *format, t_vars *vars, int *i)
 	set_size(vars, tmp);
 }
 
-static void	parse_precision(const char *format, t_vars *vars, va_list *args,
+static void	parse_precision(const char *format, t_pf_vars *vars, va_list *args,
 							int *i)
 {
 	int p;
@@ -79,7 +79,8 @@ static void	parse_precision(const char *format, t_vars *vars, va_list *args,
 	vars->precision = p;
 }
 
-static void	parse_width(const char *format, t_vars *vars, va_list *args, int *i)
+static void	parse_width(const char *format, t_pf_vars *vars,
+							va_list *args, int *i)
 {
 	int p;
 
@@ -106,16 +107,16 @@ static void	parse_width(const char *format, t_vars *vars, va_list *args, int *i)
 	vars->width = p;
 }
 
-void		parse(const char *format, t_vars *vars, va_list *args)
+void		pf_parse(const char *format, t_pf_vars *vars, va_list *args)
 {
 	int	i;
 
 	i = ++vars->pf;
-	while (!(vars->flag = isflag(1, format[i])))
+	while (!(vars->flag = pf_isflag(1, format[i])))
 	{
-		if (isflag(0, format[i]))
+		if (pf_isflag(0, format[i]))
 			vars->options[(int)format[i]] = 1;
-		else if (isflag(2, format[i]))
+		else if (pf_isflag(2, format[i]))
 			parse_size(format, vars, &i);
 		else if (format[i] == '.')
 			parse_precision(format, vars, args, &i);
@@ -129,8 +130,8 @@ void		parse(const char *format, t_vars *vars, va_list *args)
 	if (vars->flag == 0)
 	{
 		if (format[i] != '\0')
-			alt_func_c(vars, format[i]);
+			pf_alt_func_c(vars, format[i]);
 		return ;
 	}
-	convert(vars, args);
+	pf_convert(vars, args);
 }

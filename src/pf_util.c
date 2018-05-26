@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.c                                             :+:      :+:    :+:   */
+/*   pf_util.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jroussel <jroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 13:21:06 by jroussel          #+#    #+#             */
-/*   Updated: 2018/05/25 16:29:50 by jroussel         ###   ########.fr       */
+/*   Updated: 2018/05/26 13:17:20 by jroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-int		isflag(int type, char c)
+int		pf_isflag(int type, char c)
 {
 	static char	*flags[] = { "+-#0 ", "%sSpdDioOuUxXcCn", "hlzj" };
 	int			i;
@@ -27,7 +27,7 @@ int		isflag(int type, char c)
 	return (0);
 }
 
-void	define_prefix(t_vars *vars)
+void	pf_define_prefix(t_pf_vars *vars)
 {
 	vars->prlen = 1;
 	if (vars->negative)

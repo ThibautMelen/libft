@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   pf_color.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jroussel <jroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 15:55:16 by jroussel          #+#    #+#             */
-/*   Updated: 2018/05/25 17:01:25 by jroussel         ###   ########.fr       */
+/*   Updated: 2018/05/26 13:21:24 by jroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-static t_color	g_colors[] = {
+static t_pf_color	g_colors[] = {
 	{ "{reset}", "\e[0m" },
 	{ "{bold}", "\e[1m" },
 	{ "{faint}", "\e[2m" },
@@ -37,7 +37,7 @@ static t_color	g_colors[] = {
 	{ "{white}", "\e[97m" }
 };
 
-static void		get_star(t_vars *vars, va_list *args, int *i)
+static void		get_star(t_pf_vars *vars, va_list *args, int *i)
 {
 	int		j;
 	char	*tmp;
@@ -54,20 +54,20 @@ static void		get_star(t_vars *vars, va_list *args, int *i)
 		color[j + 1] = tmp[j];
 	color[len + 1] = '}';
 	color[len + 2] = '\0';
-	while (*i < (int)(sizeof(g_colors) / sizeof(t_color)))
+	while (*i < (int)(sizeof(g_colors) / sizeof(t_pf_color)))
 	{
 		if (!ft_strncmp(color, g_colors[*i].id, ft_strlen(g_colors[*i].id)))
 			break ;
 		(*i)++;
 	}
-	if (*i < (int)(sizeof(g_colors) / sizeof(t_color)))
+	if (*i < (int)(sizeof(g_colors) / sizeof(t_pf_color)))
 		vars->pf += 3;
 	free(color);
 }
 
-static void		get_color(const char *format, t_vars *vars, int *i)
+static void		get_color(const char *format, t_pf_vars *vars, int *i)
 {
-	while (*i < (int)(sizeof(g_colors) / sizeof(t_color)))
+	while (*i < (int)(sizeof(g_colors) / sizeof(t_pf_color)))
 	{
 		if (!ft_strncmp(format + vars->pf, g_colors[*i].id,
 			ft_strlen(g_colors[*i].id)))
@@ -79,25 +79,25 @@ static void		get_color(const char *format, t_vars *vars, int *i)
 	}
 }
 
-void			parse_color(const char *f, t_vars *vars, va_list *args)
+void			parse_color(const char *format, t_pf_vars *vars, va_list *args)
 {
 	int		i;
 	int		j;
 
 	i = 0;
-	if (!ft_strncmp(f + vars->pf, "{*}", 3))
+	if (!ft_strncmp(format + vars->pf, "{*}", 3))
 		get_star(vars, args, &i);
 	else
-		get_color(f, vars, &i);
-	if (i >= (int)(sizeof(g_colors) / sizeof(t_color)))
+		get_color(format, vars, &i);
+	if (i >= (int)(sizeof(g_colors) / sizeof(t_pf_color)))
 	{
-		write_buff('{', vars);
+		pf_write_buff('{', vars);
 		vars->pf++;
 	}
 	else
 	{
 		j = 0;
 		while (g_colors[i].value[j] != '\0')
-			write_buff(g_colors[i].value[j++], vars);
+			pf_write_buff(g_colors[i].value[j++], vars);
 	}
 }

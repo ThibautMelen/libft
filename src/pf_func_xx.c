@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   func_x.c                                           :+:      :+:    :+:   */
+/*   pf_func_xx.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jroussel <jroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/18 12:08:35 by jroussel          #+#    #+#             */
-/*   Updated: 2018/05/25 16:29:35 by jroussel         ###   ########.fr       */
+/*   Created: 2018/05/18 12:56:14 by jroussel          #+#    #+#             */
+/*   Updated: 2018/05/26 13:17:28 by jroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-static uintmax_t	get_nbr(t_vars *vars, va_list *args)
+static uintmax_t	get_nbr(t_pf_vars *vars, va_list *args)
 {
 	if (vars->size == 0)
 		return (va_arg(*args, uint32_t));
@@ -31,7 +31,7 @@ static uintmax_t	get_nbr(t_vars *vars, va_list *args)
 	return (va_arg(*args, uint32_t));
 }
 
-static void			set_value(uintmax_t nbr, t_vars *vars)
+static void			set_value(uintmax_t nbr, t_pf_vars *vars)
 {
 	if (nbr == 0 && vars->precision == 0)
 	{
@@ -40,9 +40,10 @@ static void			set_value(uintmax_t nbr, t_vars *vars)
 	}
 	else if (!(vars->value = ft_ultoa_base(nbr, 16)))
 		exit(-1);
+	ft_strupper(vars->value);
 }
 
-void				func_x(t_vars *vars, va_list *args)
+void				pf_func_xx(t_pf_vars *vars, va_list *args)
 {
 	uintmax_t	nbr;
 
@@ -51,7 +52,7 @@ void				func_x(t_vars *vars, va_list *args)
 	vars->valen = ft_strlen(vars->value);
 	if (vars->options['#'] && nbr > 0)
 	{
-		if (!(vars->prefix = ft_strdup("0x")))
+		if (!(vars->prefix = ft_strdup("0X")))
 			exit(-1);
 		vars->prlen = 2;
 	}
@@ -60,10 +61,10 @@ void				func_x(t_vars *vars, va_list *args)
 		vars->precision = 0;
 	vars->olen = vars->prlen + (vars->precision == -1 ? 0 : vars->precision)
 		+ vars->valen;
-	create_output(vars);
-	format(vars);
+	pf_create_output(vars);
+	pf_format(vars);
 	if (vars->prlen > 0)
 		free(vars->prefix);
 	free(vars->value);
-	write_output(vars);
+	pf_write_output(vars);
 }

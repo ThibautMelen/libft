@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   func_cc.c                                          :+:      :+:    :+:   */
+/*   pf_func_cc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jroussel <jroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 14:30:48 by jroussel          #+#    #+#             */
-/*   Updated: 2018/05/25 16:28:49 by jroussel         ###   ########.fr       */
+/*   Updated: 2018/05/26 13:17:40 by jroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-static void	fill(t_vars *vars, wchar_t wc)
+static void	fill(t_pf_vars *vars, wchar_t wc)
 {
 	int i;
 
@@ -22,7 +22,7 @@ static void	fill(t_vars *vars, wchar_t wc)
 		if (MB_CUR_MAX == 1 && wc > 127 && wc < 256)
 			vars->output[i++] = (char)wc;
 		else
-			write_unicode(vars, wc, vars->olen, &i);
+			pf_write_unicode(vars, wc, vars->olen, &i);
 		while (i < vars->width + vars->olen)
 			vars->output[i++] = ' ';
 	}
@@ -33,11 +33,11 @@ static void	fill(t_vars *vars, wchar_t wc)
 		if (MB_CUR_MAX == 1 && wc > 127 && wc < 256)
 			vars->output[i++] = (char)wc;
 		else
-			write_unicode(vars, wc, vars->olen, &i);
+			pf_write_unicode(vars, wc, vars->olen, &i);
 	}
 }
 
-void		func_cc(t_vars *vars, va_list *args)
+void		pf_func_cc(t_pf_vars *vars, va_list *args)
 {
 	wchar_t	wc;
 
@@ -49,8 +49,8 @@ void		func_cc(t_vars *vars, va_list *args)
 	}
 	if (wc < 0 || wc > 0x10FFFF)
 		return ;
-	vars->olen = bin_size(wc);
-	create_output(vars);
+	vars->olen = pf_bin_size(wc);
+	pf_create_output(vars);
 	fill(vars, wc);
-	write_output(vars);
+	pf_write_output(vars);
 }

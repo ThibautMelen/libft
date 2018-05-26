@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vars.c                                             :+:      :+:    :+:   */
+/*   pf_vars.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jroussel <jroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 17:26:35 by jroussel          #+#    #+#             */
-/*   Updated: 2018/05/25 16:29:54 by jroussel         ###   ########.fr       */
+/*   Updated: 2018/05/26 13:17:17 by jroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-void	init_vars(t_vars *vars)
+void	pf_init_vars(t_pf_vars *vars)
 {
 	int i;
 
@@ -27,10 +27,10 @@ void	init_vars(t_vars *vars)
 	vars->order[3] = 'L';
 	vars->order[4] = 'z';
 	vars->order[5] = 'j';
-	reinit_vars(vars);
+	pf_reinit_vars(vars);
 }
 
-void	reinit_vars(t_vars *vars)
+void	pf_reinit_vars(t_pf_vars *vars)
 {
 	int i;
 
