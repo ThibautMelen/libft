@@ -6,7 +6,7 @@
 /*   By: jroussel <jroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 15:55:16 by jroussel          #+#    #+#             */
-/*   Updated: 2018/05/26 13:21:24 by jroussel         ###   ########.fr       */
+/*   Updated: 2018/05/26 14:07:15 by jroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void		get_color(const char *format, t_pf_vars *vars, int *i)
 	}
 }
 
-void			parse_color(const char *format, t_pf_vars *vars, va_list *args)
+void			pf_parse_color(const char *format, t_pf_vars *vars, va_list *args)
 {
 	int		i;
 	int		j;
